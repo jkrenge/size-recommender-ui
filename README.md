@@ -6,14 +6,26 @@ Use this widget as-is, or as a starting point for building your own custom integ
 
 **[Live demo](https://parcellab.github.io/selection-guide-ui/)**
 
-| Neutral | Colored |
+**Sample with short info text**
+
+| | |
 | :---: | :---: |
-| ![Empty state](screenshots/widget-empty-state.png) | ![Fallback true-to-size](screenshots/widget-fallback-true-to-size.png) |
-| `notFoundMode: 'empty'` | `notFoundMode: 'true-to-size'` |
-| ![Runs small](screenshots/widget-runs-small.png) | ![Runs small colored](screenshots/widget-runs-small-colored.png) |
-| `appearance: 'neutral'` · long summary | `appearance: 'colored'` · long summary |
-| ![True to size](screenshots/widget-true-to-size-neutral.png) | ![True to size colored](screenshots/widget-true-to-size-colored.png) |
-| `appearance: 'neutral'` · short summary | `appearance: 'colored'` · short summary |
+| ![Short text, neutral](screenshots/shorttext_neutral_comfortable_inline.png) | ![Short text, colored](screenshots/shorttext_colored_compact_card.png) |
+| neutral color, comfortable spacing, inline display | colored, compact spacing, card display |
+
+**Sample with longer info text**
+
+| | |
+| :---: | :---: |
+| ![Long text, neutral](screenshots/longtext_neutral_compact_inline.png) | ![Long text, colored](screenshots/longtext_colored_compact_card.png) |
+| neutral color, compact spacing, inline display | colored, compact spacing, card display |
+
+**Missing data**
+
+| | |
+| :---: | :---: |
+| ![Empty state, show default](screenshots/emptystate_show-default.png) | ![Empty state, show missing](screenshots/emptystate_show-missing.png) |
+| `notFoundMode: 'true-to-size'` — shows default fit info | `notFoundMode: 'empty'` — shows missing data notice |
 
 ## Overview
 
@@ -164,17 +176,40 @@ The widget renders in **light DOM** (not Shadow DOM), so host-page typography in
 ### Element Classes
 
 ```
-.pl-size-recommender__header
-.pl-size-recommender__title
-.pl-size-recommender__pill
-.pl-size-recommender__scale
-.pl-size-recommender__scale-labels
-.pl-size-recommender__track
-.pl-size-recommender__marker
-.pl-size-recommender__confidence
-.pl-size-recommender__recommendation
-.pl-size-recommender__recommendation-title
-.pl-size-recommender__recommendation-summary
+.pl-size-recommender__header                  — header row (title + pill)
+.pl-size-recommender__title                   — "How It Fits" heading
+.pl-size-recommender__pill                    — fit category badge
+.pl-size-recommender__scale                   — scale container (labels + track)
+.pl-size-recommender__scale-labels            — "Runs Small / True to Size / Runs Large"
+.pl-size-recommender__track                   — the horizontal fit bar
+.pl-size-recommender__marker                  — position dot on the track
+.pl-size-recommender__recommendation          — recommendation callout card
+.pl-size-recommender__recommendation-header   — header row inside recommendation
+.pl-size-recommender__recommendation-icon     — fit direction icon (↑/↓/−)
+.pl-size-recommender__recommendation-title    — e.g., "Consider sizing up"
+.pl-size-recommender__recommendation-meta     — confidence text
+.pl-size-recommender__recommendation-summary  — AI-generated feedback summary
+```
+
+### Hiding Elements
+
+Use `display: none` on any element class to hide specific parts:
+
+```css
+/* Hide the confidence score */
+.pl-size-recommender__recommendation-meta { display: none; }
+
+/* Hide the AI summary text */
+.pl-size-recommender__recommendation-summary { display: none; }
+
+/* Hide the fit category pill badge */
+.pl-size-recommender__pill { display: none; }
+
+/* Hide the entire scale bar */
+.pl-size-recommender__scale { display: none; }
+
+/* Hide the widget entirely when in empty/no-data state */
+.pl-size-recommender--state-empty { display: none; }
 ```
 
 ### CSS Variables
